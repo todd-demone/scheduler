@@ -8,7 +8,7 @@ function InterviewerListItem(props) {
     "interviewers__item--selected": props.selected,
   });
   return (
-    <li onClick={() => props.setInterviewer(props.id)} className={interviewerClasses}>
+    <li onClick={props.setInterviewer} className={interviewerClasses}>
       <img 
         src={props.avatar}
         alt={props.name}
