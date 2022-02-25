@@ -17,6 +17,7 @@ import Show from 'components/Appointment/Show';
 import Confirm from 'components/Appointment/Confirm';
 import Status from 'components/Appointment/Status';
 import Error from 'components/Appointment/Error';
+import Form from 'components/Appointment/Form';
 
 storiesOf("Button", module)
   .addParameters({
@@ -68,13 +69,13 @@ storiesOf("DayListItem", module)
       backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
     })
     .add("Monday", () => (
-      <DayList days={days} day={"Monday"} setDay={action("setDay")} />
+      <DayList days={days} value={"Monday"} onChange={action("setDay")} />
     ))
     .add("Tuesday", () => (
-      <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
+      <DayList days={days} value={"Tuesday"} onChange={action("setDay")} />
     ))
     .add("Wednesday", () => (
-        <DayList days={days} day={"Wednesday"} setDay={action("setDay")} />
+        <DayList days={days} value={"Wednesday"} onChange={action("setDay")} />
     ));
 
     const interviewer = {
@@ -130,13 +131,13 @@ storiesOf("DayListItem", module)
         .add("Selected", () => (
           <InterviewerList
             interviewers={interviewers}
-            interviewer={3}
+            value={3}
           />
         ))
         .add("Clickable", () => (
           <InterviewerList
             interviewers={interviewers}
-            setInterviewer={action("setInterviewer")}
+            onChange={action("setInterviewer")}
           />
         ));
 
@@ -182,4 +183,21 @@ storiesOf("DayListItem", module)
             message="Could not delete appointment"
             onClose={action("onClose")}
           />
+        ))
+        .add("Edit", () => (
+          <Form
+            student="Todd Demone"
+            interviewer={3}
+            interviewers={interviewers}
+            onSave={action("onSave")}
+            onCancel={action("onCancel")}
+          />
+        ))
+        .add("Create", () => (
+          <Form
+            interviewers={interviewers}
+            onSave={action("onSave")}
+            onCancel={action("onCancel")}
+          />
         ));
+        
