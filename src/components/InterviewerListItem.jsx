@@ -9,7 +9,7 @@ function InterviewerListItem(props) {
   });
   return (
     <li onClick={props.setInterviewer} className={interviewerClasses}>
-      <img 
+      <img
         src={props.avatar}
         alt={props.name}
         className="interviewers__item-image"
