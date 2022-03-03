@@ -9,13 +9,13 @@ export default function Appointment(props) {
     <article className="appointment">
       <Header time={props.time} />
       { // check if an interview object was passed
-        (props.interview) 
-          ? <Show 
+        (props.interview)
+          ? <Show
               student={props.interview.student}
               interviewer={props.interview.interviewer}
               onEdit={props.onEdit}
               onDelete={props.onDelete}
-            /> 
+            />
           : <Empty onAdd={props.onAdd} />
       }
     </article>
