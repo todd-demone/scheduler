@@ -43,21 +43,21 @@ const appointments = {
   }
 };
 
-const appointmentsArray = Object.values(appointments).map((appointment) => (
-  <Appointment
-    key={appointment.id}
-    {...appointment}
-    onEdit={() => console.log('onEdit')}
-    onDelete={() => console.log("onDelete")}
-    onAdd={() => console.log("onAdd")}
-  />
-));
-
-appointmentsArray.push(<Appointment key="last" time="5pm" />);
 
 export default function Application(props) {
   const [day, setDay] = useState("Monday");
   const [days, setDays] = useState([]);
+
+  const appointmentsArray = Object.values(appointments).map((appointment) =>
+    (<Appointment
+      key={appointment.id}
+      {...appointment}
+      onEdit={() => console.log('onEdit')}
+      onDelete={() => console.log("onDelete")}
+      onAdd={() => console.log("onAdd")}
+    />)
+  );
+  appointmentsArray.push(<Appointment key="last" time="5pm" />);
 
   useEffect(() => {
     axios.get('/api/days')
@@ -93,6 +93,5 @@ export default function Application(props) {
       </section>
 
     </main>
-
   );
 }
