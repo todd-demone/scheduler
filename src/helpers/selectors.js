@@ -4,6 +4,13 @@ export function getAppointmentsForDay(state, day) {
   const dayObject = state.days.find((dayItem) => dayItem.name === day);
   // return an empty array when the day is not found
   if (!dayObject) return [];
-  const appointmentsArray = Object.values(state.appointments)
-  return appointmentsArray.filter((appointment) => dayObject.appointments.includes(appointment.id));
-}
+  return Object.values(state.appointments).filter((appointment) => dayObject.appointments.includes(appointment.id));
+};
+
+export function getInterview(state, interview) {
+  if (!interview) return null;
+  return {
+    student: interview.student,
+    interviewer: state.interviewers[interview.interviewer]
+  };
+};
