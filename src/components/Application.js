@@ -36,22 +36,25 @@ export default function Application(props) {
   const interviewers = getInterviewersForDay(state, state.day);
 
   function bookInterview(id, interview) {
-    console.log(id, interview);
 
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
-
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
 
-    setState({
-      ...state,
-      appointments
-    });
+    // By including the `return` keyword immediately before `axios.put`, we are returning the Promise object returned by axios.put() to the caller of bookInterview(). Then the caller of bookInterview() can attach handlers to the Promise object. The handler code is executed code only when the axios.put() operation has succeeded or failed.
+    return axios.put(`/api/appointments/${id}`, { interview })
+      .then((result) => {
+        setState({
+          ...state,
+          appointments
+        });
+      })
+      .catch((error) => console.log('my error: ', error.message));
   };
 
   const appointmentsArray = dailyAppointments.map((appointment) => {
