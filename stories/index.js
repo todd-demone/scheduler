@@ -63,7 +63,7 @@ storiesOf("DayListItem", module)
       spots: 0,
     },
   ];
-  
+
   storiesOf("DayList", module)
     .addParameters({
       backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
@@ -83,7 +83,7 @@ storiesOf("DayListItem", module)
       name: "Sylvia Palmer",
       avatar: "https://i.imgur.com/LpaY82x.png"
     };
-    
+
     storiesOf("InterviewerListItem", module)
       .addParameters({
         backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -118,7 +118,7 @@ storiesOf("DayListItem", module)
         { id: 4, name: "Cohana Roy", avatar: "https://i.imgur.com/FK8V841.jpg" },
         { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
       ];
-      
+
       storiesOf("InterviewerList", module)
         .addParameters({
           backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -141,7 +141,7 @@ storiesOf("DayListItem", module)
           />
         ));
 
-      
+
       storiesOf("Appointment", module)
         .addParameters({
           backgrounds: [{ name: "white", value: "#fff", default: true }]
