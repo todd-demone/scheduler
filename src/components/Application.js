@@ -6,32 +6,15 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "help
 import "components/Application.scss";
 
 export default function Application(props) {
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {}
   });
-  const setDay = (day) => setState({...state, day});
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
-  const interviewers = getInterviewersForDay(state, state.day);
-  const appointmentsArray = dailyAppointments.map((appointment) => {
-    const interview = getInterview(state, appointment.interview);
 
-    return (
-      <Appointment
-        key={appointment.id}
-        id= {appointment.id}
-        time={appointment.time}
-        interview={interview}
-        interviewers={interviewers}
-        onAdd={() => console.log("onAdd")}
-        onEdit={() => console.log('onEdit')}
-        onDelete={() => console.log("onDelete")}
-      />
-    );
-  });
-  appointmentsArray.push(<Appointment key="last" time="5pm" />);
+  const setDay = (day) => setState({...state, day});
 
   useEffect(() => {
     Promise.all([
@@ -48,6 +31,34 @@ export default function Application(props) {
       }));
     })
   }, []);
+
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
+
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+  }
+
+  const appointmentsArray = dailyAppointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+
+    return (
+      <Appointment
+        key={appointment.id}
+        id= {appointment.id}
+        time={appointment.time}
+        interview={interview}
+        interviewers={interviewers}
+        bookInterview={bookInterview}
+        onAdd={() => console.log("onAdd")}
+        onEdit={() => console.log('onEdit')}
+        onDelete={() => console.log("onDelete")}
+      />
+    );
+  });
+
+  appointmentsArray.push(<Appointment key="last" time="5pm" />);
+
 
   return (
     <main className="layout">
