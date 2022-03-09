@@ -10,6 +10,7 @@ import {
 import "components/Application.scss";
 
 export default function Application(props) {
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -18,7 +19,7 @@ export default function Application(props) {
   });
 
   const setDay = (day) => setState({ ...state, day });
-
+  
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -40,21 +41,15 @@ export default function Application(props) {
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
-      interview: { ...interview },
+      interview: { ...interview }
     };
     const appointments = {
       ...state.appointments,
-      [id]: appointment,
+      [id]: appointment
     };
-
-    // By including the `return` keyword immediately before `axios.put`, we are returning the Promise object returned by axios.put() to the caller of bookInterview(). Then the caller of bookInterview() can attach handlers to the Promise object. The handler code is executed code only when the axios.put() operation has succeeded or failed.
+    
     return axios.put(`/api/appointments/${id}`, { interview })
-      .then((result) => {
-        setState({
-          ...state,
-          appointments,
-        });
-      })
+      .then(() => setState({...state, appointments,}))
       .catch((error) => console.log(error.message));
   }
 
@@ -63,12 +58,10 @@ export default function Application(props) {
       ...state.appointments[id],
       interview: null,
     };
-
     const appointments = {
       ...state.appointments,
       [id]: appointment,
     };
-
     return axios.delete(`/api/appointments/${id}`)
       .then((res) => {
         setState({ ...state, appointments });
@@ -78,7 +71,6 @@ export default function Application(props) {
 
   const appointmentsArray = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
-
     return (
       <Appointment
         key={appointment.id}
