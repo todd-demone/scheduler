@@ -9,6 +9,7 @@ import "./styles.scss";
 import useVisualMode from "hooks/useVisualMode";
 
 export default function Appointment(props) {
+  
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -16,6 +17,7 @@ export default function Appointment(props) {
   const DELETING = "DELETING";
   const CONFIRM = "CONFIRM";
   const EDIT="EDIT";
+  
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -23,24 +25,20 @@ export default function Appointment(props) {
   function save(name, interviewer) {
     const interview = {
       student: name,
-      interviewer,
+      interviewer
     };
-
     transition(SAVING);
-
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
-      .catch((error) => console.log("my error: ", error.message));
+      .catch((error) => console.log(error.message));
   }
 
   function remove(id) {
     transition(DELETING);
     props
       .cancelInterview(id)
-      .then(() => {
-        transition(EMPTY);
-      })
+      .then(() => transition(EMPTY))
       .catch((error) => console.log(error.message));
   }
 
@@ -59,7 +57,7 @@ export default function Appointment(props) {
       {mode === CREATE && (
         <Form
           interviewers={props.interviewers}
-          onCancel={() => back()}
+          onCancel={back}
           onSave={save}
         />
       )}
@@ -68,31 +66,20 @@ export default function Appointment(props) {
       {mode === CONFIRM && (
         <Confirm
           message="Are you sure you would like to delete?"
-          onCancel={() => back()}
+          onCancel={back}
           onConfirm={() => remove(props.id)}
         />
       )}
-      {mode === "EDIT" && (
+      
+      {mode === EDIT && (
         <Form
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           interviewers={props.interviewers}
-          onCancel={() => back()}
+          onCancel={back}
           onSave={save}
         />
       )}
-      {/* { // check if an interview object was passed
-        (props.interview)
-        ? <Show
-              student={props.interview.student}
-              interviewer={props.interview.interviewer}
-              onEdit={props.onEdit}
-              onDelete={props.onDelete}
-            />
-          : <Empty
-              onAdd={props.onAdd}
-            />
-      } */}
     </article>
   );
 }
