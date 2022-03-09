@@ -50,7 +50,6 @@ export default function Application(props) {
     
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => setState({...state, appointments,}))
-      .catch((error) => console.log(error.message));
   }
 
   function cancelInterview(id) {
@@ -66,7 +65,6 @@ export default function Application(props) {
       .then((res) => {
         setState({ ...state, appointments });
       })
-      .catch((error) => console.log(error.message));
   }
 
   const appointmentsArray = dailyAppointments.map((appointment) => {
