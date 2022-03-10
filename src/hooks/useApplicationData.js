@@ -10,7 +10,7 @@ export default function useApplicationData() {
   });
     
   const setDay = (day) => setState({ ...state, day });
-      
+
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -35,9 +35,9 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    
+    const days = updateDaysSpotsRemaining(id);
     return axios.put(`/api/appointments/${id}`, { interview })
-      .then(() => setState({...state, appointments,}));
+      .then(() => setState({...state, appointments, days}));
   };
 
   function cancelInterview(id) {
@@ -49,9 +49,25 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
+    const days = updateDaysSpotsRemaining(id, true);
     return axios.delete(`/api/appointments/${id}`)
-      .then(() => setState({ ...state, appointments }));
+      .then(() => setState({ ...state, appointments, days }));
+  };
+
+  /**
+   * Adds or subtracts a spot from the spots property in a day object in the days array.
+   * @param {Number} id The appointment id
+   * @param {Boolean} cancel default = false; If an appointment is being cancelled, use true; if an appointment is being added, use false. 
+   * @returns an Array of day objects (a revised copy of state.days)
+   */
+  function updateDaysSpotsRemaining(id, cancel=false) {
+    const dayIndex = state.days.findIndex((day) => day.appointments.includes(id));
+    const newDay = { ...state.days[dayIndex] };
+    newDay.spots = cancel ? newDay.spots + 1 : newDay.spots - 1;
+    const newDays = [ ...state.days ];
+    newDays[dayIndex] = newDay;
+    return newDays;
   };
 
   return { state, setDay, bookInterview, cancelInterview };
-}
+};
