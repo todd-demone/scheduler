@@ -61,9 +61,12 @@ export default function useApplicationData() {
    * @returns an Array of day objects (a revised copy of state.days)
    */
   function updateDaysSpotsRemaining(id, cancel=false) {
+    const wasInterviewNull = state.appointments[id].interview ? false : true;
     const dayIndex = state.days.findIndex((day) => day.appointments.includes(id));
     const newDay = { ...state.days[dayIndex] };
-    newDay.spots = cancel ? newDay.spots + 1 : newDay.spots - 1;
+    newDay.spots = cancel 
+                   ? newDay.spots + 1 
+                   : (wasInterviewNull ? newDay.spots - 1 : newDay.spots);
     const newDays = [ ...state.days ];
     newDays[dayIndex] = newDay;
     return newDays;
