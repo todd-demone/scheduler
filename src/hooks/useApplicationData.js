@@ -35,7 +35,7 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    const days = calculateSpots(id);
+    const days = updateDaysSpotsRemaining(id);
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => setState({...state, appointments, days}));
   };
@@ -49,44 +49,25 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-    const days = calculateSpots(id, true);
+    const days = updateDaysSpotsRemaining(id, true);
     return axios.delete(`/api/appointments/${id}`)
       .then(() => setState({ ...state, appointments, days }));
   };
 
-  // Add or remove a spot from a given day
-  function calculateSpots(id, cancel=false) {
-    const dayWithAppointment = state.days.find((day) => day.appointments.includes(id))
-    const spots = cancel ? dayWithAppointment.spots - 1 : dayWithAppointment.spots + 1;
-    const newDay = {
-      ...dayWithAppointment,
-      spots,
-    };
-    const newDays = [
-      ...state.days,
-      newDay,
-    ];
+  /**
+   * Adds or subtracts a spot from the spots property in a day object in the days array.
+   * @param {Number} id The appointment id
+   * @param {Boolean} cancel default = false; If an appointment is being cancelled, use true; if an appointment is being added, use false. 
+   * @returns an Array of day objects (a revised copy of state.days)
+   */
+  function updateDaysSpotsRemaining(id, cancel=false) {
+    const dayIndex = state.days.findIndex((day) => day.appointments.includes(id));
+    const newDay = { ...state.days[dayIndex] };
+    newDay.spots = cancel ? newDay.spots + 1 : newDay.spots - 1;
+    const newDays = [ ...state.days ];
+    newDays[dayIndex] = newDay;
     return newDays;
   };
-
-    // for (const d of state.days) {
-    //   let spots = 0;
-    //   for (const appointment of d.appointments) {
-    //     if (state.appointments[appointment].interview === null) {
-    //       spots++;
-    //     }
-    //   }
-    //   const newDay = {
-    //     ...state.days[d.id],
-    //     spots,
-    //   };
-    //   const newDays = {
-    //     ...state.days,
-    //     [d.id]: newDay,
-    //   };
-    // }
-    // // update database to reflect spots remaining
-    // // setState({ ...state, newDays})
 
   return { state, setDay, bookInterview, cancelInterview };
 };
