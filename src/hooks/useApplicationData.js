@@ -10,7 +10,7 @@ export default function useApplicationData() {
   });
     
   const setDay = (day) => setState({ ...state, day });
-      
+
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -35,9 +35,9 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    
+    const days = calculateSpots(id);
     return axios.put(`/api/appointments/${id}`, { interview })
-      .then(() => setState({...state, appointments,}));
+      .then(() => setState({...state, appointments, days}));
   };
 
   function cancelInterview(id) {
@@ -49,9 +49,44 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
+    const days = calculateSpots(id, true);
     return axios.delete(`/api/appointments/${id}`)
-      .then(() => setState({ ...state, appointments }));
+      .then(() => setState({ ...state, appointments, days }));
   };
 
+  // Add or remove a spot from a given day
+  function calculateSpots(id, cancel=false) {
+    const dayWithAppointment = state.days.find((day) => day.appointments.includes(id))
+    const spots = cancel ? dayWithAppointment.spots - 1 : dayWithAppointment.spots + 1;
+    const newDay = {
+      ...dayWithAppointment,
+      spots,
+    };
+    const newDays = [
+      ...state.days,
+      newDay,
+    ];
+    return newDays;
+  };
+
+    // for (const d of state.days) {
+    //   let spots = 0;
+    //   for (const appointment of d.appointments) {
+    //     if (state.appointments[appointment].interview === null) {
+    //       spots++;
+    //     }
+    //   }
+    //   const newDay = {
+    //     ...state.days[d.id],
+    //     spots,
+    //   };
+    //   const newDays = {
+    //     ...state.days,
+    //     [d.id]: newDay,
+    //   };
+    // }
+    // // update database to reflect spots remaining
+    // // setState({ ...state, newDays})
+
   return { state, setDay, bookInterview, cancelInterview };
-}
+};
