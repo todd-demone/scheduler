@@ -3,10 +3,16 @@
 The Interview Scheduler application is a [React](https://reactjs.org/) application that allows a student to create, edit and delete interview appointments.
 
 ## Screenshots
+#### Basic functionality
+![Basic functionality](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-basic.gif)
 
-![Basic functionality](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-add-interview.gif)
-![Add interview](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-add-interview.gif)
+#### Add an interview
+![Add interview](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-add.gif)
+
+#### Edit an interview
 ![Edit interview](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-edit-interview.gif)
+
+#### Delete an interview 
 ![Delete interview](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-delete-interview.gif)
 
 ## Purpose
