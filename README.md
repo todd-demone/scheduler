@@ -23,7 +23,7 @@ Data is retrieved from an [API](https://github.com/todd-demone/scheduler-api) pr
 
 ## Getting Started
 
-The following instructions assume you have [git](https://git-scm.com/), [Node.js](https://nodejs.org/en/) version 10.16.1 and npm installed on your computer. 
+The following instructions assume you have [git](https://git-scm.com/), [Node.js](https://nodejs.org/) version 10.16.1 and npm installed on your computer. 
 
 Clone the repository and run the app using the following commands in the terminal:
 
@@ -37,6 +37,7 @@ npm start       // start the Webpack development server
 To use the app, go to <http://localhost:8000> in your browser.
 
 ## Dependencies
+* [Node.js](https://nodejs.org/) version 10.16.1
 * [React](https://reactjs.org/)
 * [Axios](https://axios-http.com/)
 * [Classnames](https://www.npmjs.com/package/classnames)
