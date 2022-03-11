@@ -10,7 +10,7 @@ Data is retrieved from an [API](https://github.com/todd-demone/scheduler-api) pr
 
 ## Screenshots
 #### Using sidebar to switch calendar view
-![Basic functionality](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-5-large-file.gif)
+![Switch calendar view](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-5-large-file.gif)
 
 #### Adding an interview
 ![Add interview](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-6-large.gif)
@@ -23,7 +23,7 @@ Data is retrieved from an [API](https://github.com/todd-demone/scheduler-api) pr
 
 ## Getting Started
 
-The following instructions assume you have [git](https://git-scm.com/), [Node.js](https://nodejs.org/) version 10.16.1 and npm installed on your computer. 
+The following instructions assume you have [git](https://git-scm.com/) and [Node.js](https://nodejs.org/) version 10.16.1 installed on your computer. 
 
 Clone the repository and run the app using the following commands in the terminal:
 
