@@ -2,8 +2,8 @@ import React from 'react';
 import InterviewerListItem from 'components/InterviewerListItem';
 import 'components/InterviewerList.scss';
 
-export default function InterviewerList(props) {
-  const interviewersArray = props.interviewers.map((interviewer => 
+function InterviewerList(props) {
+  const interviewersArray = props.interviewers.map((interviewer =>
    (<InterviewerListItem
       key={interviewer.id}
       name={interviewer.name}
@@ -12,6 +12,7 @@ export default function InterviewerList(props) {
       setInterviewer={() => props.onChange(interviewer)}
     />)
   ));
+
   return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
@@ -20,4 +21,6 @@ export default function InterviewerList(props) {
       </ul>
     </section>
   );
-}
+};
+
+export default InterviewerList;
