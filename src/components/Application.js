@@ -9,7 +9,7 @@ import {
 import useApplicationData from "hooks/useApplicationData";
 import "components/Application.scss";
 
-export default function Application(props) {
+function Application(props) {
   const {
     state,
     setDay,
@@ -56,4 +56,6 @@ export default function Application(props) {
       </section>
     </main>
   );
-}
+};
+
+export default Application;

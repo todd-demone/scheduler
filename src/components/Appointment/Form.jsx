@@ -1,10 +1,11 @@
-import Button from 'components/Button';
-import InterviewerList from 'components/InterviewerList';
 import React, {useState} from 'react';
+import InterviewerList from 'components/InterviewerList';
+import Button from 'components/Button';
 
-export default function Form(props) {
+function Form(props) {
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+
   function reset() {
     setStudent("");
     setInterviewer(null);
@@ -13,7 +14,7 @@ export default function Form(props) {
   function cancel() {
     reset();
     props.onCancel();
-  }
+  };
 
   return (
     <main className="appointment__card appointment__card--create">
@@ -43,3 +44,5 @@ export default function Form(props) {
     </main>
   );
 };
+
+export default Form;
