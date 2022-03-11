@@ -4,10 +4,10 @@ The Interview Scheduler application is a [React](https://reactjs.org/) applicati
 
 ## Screenshots
 
-![Basic functionality]()
-![Add interview]()
-![Edit interview]()
-![Delete interview]()
+![Basic functionality](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-add-interview.gif)
+![Add interview](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-add-interview.gif)
+![Edit interview](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-edit-interview.gif)
+![Delete interview](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-delete-interview.gif)
 
 ## Purpose
 
