@@ -2,8 +2,18 @@
 
 The Interview Scheduler application is a [React](https://reactjs.org/) application that allows a student to create, edit and delete interview appointments.
 
+## Purpose
+
+I created the Interview Scheduler application while completing the [Lighthouse Labs](https://github.com/lighthouse-labs) [Web Development Flex Program](https://www.lighthouselabs.ca/en/web-development-flex-program). 
+
+The application was made with [React](https://reactjs.org/). 
+
+Data is retrieved from an [API](https://github.com/todd-demone/scheduler-api) provided by Lighthouse Labs.
+
+Testing was performed using the [Jest](https://jestjs.io/) testing framework and the [Storybook](https://storybook.js.org/) visual test bed.
+
 ## Screenshots
-#### Basic functionality
+#### Using sidebar to switch calendar view
 ![Basic functionality](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-5-large-file.gif)
 
 #### Add an interview
@@ -14,16 +24,6 @@ The Interview Scheduler application is a [React](https://reactjs.org/) applicati
 
 #### Delete an interview 
 ![Delete interview](https://raw.githubusercontent.com/todd-demone/scheduler/main/docs/scheduler-8-large.gif)
-
-## Purpose
-
-I created the Interview Scheduler application while completing the [Lighthouse Labs](https://github.com/lighthouse-labs) [Web Development Flex Program](https://www.lighthouselabs.ca/en/web-development-flex-program). 
-
-The application was made with [React](https://reactjs.org/). 
-
-Data is retrieved from an [API](https://github.com/todd-demone/scheduler-api) provided by Lighthouse Labs.
-
-Testing was performed using the [Jest](https://jestjs.io/) testing framework and the [Storybook](https://storybook.js.org/) visual test bed.
 
 ## Getting Started
 
