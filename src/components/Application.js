@@ -9,7 +9,7 @@ import {
 import useApplicationData from "hooks/useApplicationData";
 import "components/Application.scss";
 
-function Application(props) {
+function Application() {
   const {
     state,
     setDay,
