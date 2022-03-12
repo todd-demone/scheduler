@@ -34,23 +34,27 @@ function Appointment(props) {
     cancelInterview,
   } = props;
 
-  function save(name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer
-    };
+  function save(name="", interviewer=null) {
     transition(SAVING);
-    bookInterview(id, interview)
-      .then(() => transition(SHOW))
-      .catch((error) => transition(ERROR_SAVE, true));
-  }
+    if (!name || !interviewer) {
+      transition(ERROR_SAVE, true);
+    } else {
+      const interview = {
+        student: name,
+        interviewer: interviewer.id
+      };
+      bookInterview(id, interview)
+        .then(() => transition(SHOW))
+        .catch(() => transition(ERROR_SAVE, true));
+    }
+  };
 
   function destroy(id) {
     transition(DELETING, true);
     cancelInterview(id)
       .then(() => transition(EMPTY))
-      .catch((error) => transition(ERROR_DELETE, true));
-  }
+      .catch(() => transition(ERROR_DELETE, true));
+  };
 
   return (
     <article className="appointment">
