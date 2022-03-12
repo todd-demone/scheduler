@@ -6,6 +6,20 @@ function useApplicationData() {
   const SET_INTERVIEW = "SET_INTERVIEW";
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 
+  function updateSpotsRemaining(state, day) {
+    const initialSpots = 5;
+    return day.appointments.reduce(
+      (previousSpotsTotal, appointmentId) => {
+        if (state.appointments[appointmentId].interview) {
+          return previousSpotsTotal - 1;
+        } else {
+          return previousSpotsTotal;
+        }
+      }
+      , initialSpots
+    );
+  };
+
   function reducer(state, action) {
 
     if (action.type === SET_DAY) {
@@ -69,20 +83,6 @@ function useApplicationData() {
         interviewers: all[2].data,
       }));
   }, []);
-
-  function updateSpotsRemaining(state, day) {
-    const initialSpots = 5;
-    return day.appointments.reduce(
-      (previousSpotsTotal, appointmentId) => {
-        if (state.appointments[appointmentId].interview) {
-          return previousSpotsTotal - 1;
-        } else {
-          return previousSpotsTotal;
-        }
-      }
-      , initialSpots
-    );
-  }
 
   function bookInterview(id, interview) {
     return axios.put(`/api/appointments/${id}`, { interview })
