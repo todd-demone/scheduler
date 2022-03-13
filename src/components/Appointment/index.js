@@ -90,7 +90,6 @@ function Appointment(props) {
           onSave={save}
         />
       )}
-
       {mode === CONFIRM && (
         <Confirm
           message="Are you sure you would like to delete?"
@@ -98,7 +97,6 @@ function Appointment(props) {
           onConfirm={() => destroy(id)}
         />
       )}
-
       {mode === EDIT && (
         <Form
           student={interview.student}
@@ -108,7 +106,6 @@ function Appointment(props) {
           onSave={save}
         />
       )}
-
     </article>
   );
 };
