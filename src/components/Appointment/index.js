@@ -35,16 +35,15 @@ function Appointment(props) {
   } = props;
 
   /**
-   * When a user clicks 'save' to add or edit an appointment, this
-   * function creates an interview object from the given parameters, calls
-   * {@link bookInterview} to push the interview to the API and update
-   * local state. This function then sets the visual mode state to SHOW (if
-   * successful) or ERROR_SAVE (if error).
+   * Triggers update of db and local application state with new interview
+   * object, then updates visual mode state. An event handler called when
+   * user clicks 'save' to add/edit appointment.
    * @param {string} name - the student name
    * @param {Object} [interviewer=null] - the interviewer
    */
   function save(name="", interviewer=null) {
     transition(SAVING);
+    // Show error screen if name field is empty or no interview selected
     if (!name || !interviewer) {
       transition(ERROR_SAVE, true);
     } else {
@@ -58,11 +57,9 @@ function Appointment(props) {
     }
   };
 
-  /** When a user confirms that they want to delete an appointment,
-   * this function calls {@link cancelInterview} to request the API delete
-   * the appointment and then update local state. This function then
-   * sets the visual mode state to SHOW (if successful) or
-   * ERROR_SAVE (if error).
+  /** An event handler that is called when a user confirms the deletion of
+   * an appointment, 'destroy' sets into motion the updating of the database and
+   * local application state as well as the update of visual mode state.
    * @param {number} id - the appointment id
    */
   function destroy(id) {
