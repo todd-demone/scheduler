@@ -31,7 +31,7 @@ function reducer(state, action) {
   if (action.type === "SET_DAY") {
     const { day } = action;
     return { ...state, day };
-    }
+  }
 
   if (action.type === "SET_INTERVIEW") {
     const { id, interview } = action;

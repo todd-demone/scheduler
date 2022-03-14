@@ -16,7 +16,7 @@ function Appointment(props) {
   const ERROR_DELETE = "ERROR_DELETE";
   const ERROR_SAVE = "ERROR_SAVE";
   const CREATE = "CREATE";
-  const EDIT="EDIT";
+  const EDIT = "EDIT";
   const SHOW = "SHOW";
   const DELETING = "DELETING";
   const SAVING = "SAVING";
@@ -41,7 +41,7 @@ function Appointment(props) {
    * @param {string} name - the student name
    * @param {Object} [interviewer=null] - the interviewer
    */
-  function save(name="", interviewer=null) {
+  function save(name = "", interviewer = null) {
     transition(SAVING);
     // Show error screen if name field is empty or no interview selected
     if (!name || !interviewer) {
