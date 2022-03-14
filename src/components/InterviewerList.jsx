@@ -8,7 +8,7 @@ function InterviewerList(props) {
       key={interviewer.id}
       name={interviewer.name}
       avatar={interviewer.avatar}
-      selected={props.value === null ? false : interviewer.id === props.value.id}
+      selected={!props.value ? false : interviewer.id === props.value.id}
       setInterviewer={() => props.onChange(interviewer)}
     />)
   ));
