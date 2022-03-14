@@ -34,8 +34,16 @@ function Appointment(props) {
     cancelInterview,
   } = props;
 
+  /**
+   * Triggers update of db and local application state with new interview
+   * object, then updates visual mode state. An event handler called when
+   * user clicks 'save' to add/edit appointment.
+   * @param {string} name - the student name
+   * @param {Object} [interviewer=null] - the interviewer
+   */
   function save(name="", interviewer=null) {
     transition(SAVING);
+    // Show error screen if name field is empty or no interview selected
     if (!name || !interviewer) {
       transition(ERROR_SAVE, true);
     } else {
@@ -49,6 +57,11 @@ function Appointment(props) {
     }
   };
 
+  /** An event handler that is called when a user confirms the deletion of
+   * an appointment, 'destroy' sets into motion the updating of the database and
+   * local application state as well as the update of visual mode state.
+   * @param {number} id - the appointment id
+   */
   function destroy(id) {
     transition(DELETING, true);
     cancelInterview(id)

@@ -4,6 +4,9 @@ import reducer from '../reducers/reducer';
 
 function useApplicationData() {
 
+  /**
+   * Hook initializes application state and creates dispatch method.
+   */
   const [state, dispatch] = useReducer(reducer, {
     day: "Monday",
     days: [],
@@ -11,13 +14,10 @@ function useApplicationData() {
     interviewers: {},
   });
 
-  function setDay(day) {
-    return dispatch({
-      type: "SET_DAY",
-      day,
-    });
-  };
-
+  /**
+   * Hook retrieves application data from API and triggers setting of
+   * application state.
+   */
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -32,6 +32,29 @@ function useApplicationData() {
       }));
   }, []);
 
+
+  /**
+   * Triggers update of state.day. An event handler called when DayListItem
+   * is clicked in navbar.
+   * @param {string} day - a weekday
+   */
+  function setDay(day) {
+    dispatch({
+      type: "SET_DAY",
+      day,
+    });
+  };
+
+
+  /**
+   * Pushes new/edited interview to API and triggers update of local state
+   * (i.e., appointments and days). A helper function for {@link save}
+   * event handler.
+   * @param {number} id - An appointment id
+   * @param {object} interview - An object containing a student
+   * name (string) and interviewer id (number)
+   * @returns A Promise object
+   */
   function bookInterview(id, interview) {
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => dispatch({
@@ -41,6 +64,14 @@ function useApplicationData() {
       }));
   };
 
+
+  /**
+   * Instructs API to delete interview and triggers update of local state
+   * (i.e., appointments and days). A helper function for {@link destroy}
+   * event handler.
+   * @param {number} id - An appointment id
+   * @returns A Promise object
+   */
   function cancelInterview(id) {
     return axios.delete(`/api/appointments/${id}`)
       .then(() => dispatch({
