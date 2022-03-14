@@ -32,6 +32,12 @@ function useApplicationData() {
       }));
   }, []);
 
+  /**
+   * 
+   * @param {*} id 
+   * @param {*} interview 
+   * @returns 
+   */
   function bookInterview(id, interview) {
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => dispatch({
@@ -41,6 +47,11 @@ function useApplicationData() {
       }));
   };
 
+  /**
+   * 
+   * @param { } id 
+   * @returns 
+   */
   function cancelInterview(id) {
     return axios.delete(`/api/appointments/${id}`)
       .then(() => dispatch({

@@ -6,11 +6,19 @@ function Form(props) {
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
+  /**
+   * This function resets the Form's state (i.e., 'student' and 'interviewer')
+   * to the default values.
+   */
   function reset() {
     setStudent("");
     setInterviewer(null);
   };
 
+  /**
+   * This function uses helper functions to reset the Form's state and set
+   * the visual mode state back to its previous value (i.e., EMPTY or SHOW).
+   */
   function cancel() {
     reset();
     props.onCancel();
