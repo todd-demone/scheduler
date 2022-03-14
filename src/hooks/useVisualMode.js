@@ -5,7 +5,7 @@ function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]);
 
   /**
-   * Conditionally updates the state (mode and history) for an Appointment
+   * Conditionally updates the visual state for an Appointment
    * component.
    * @param {string} newMode - the next visual state (aka mode) of an
    * Appointment component
@@ -22,7 +22,7 @@ function useVisualMode(initial) {
   }
 
   /**
-   * Removes current mode from history and sets mode to previous value.
+   * Moves the visual state of an Appointment component back to a previous value.
    * An event handler used when user wants to move back in an Appointment
    * component.
    */
