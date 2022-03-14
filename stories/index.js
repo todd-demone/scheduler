@@ -125,18 +125,20 @@ storiesOf("InterviewerList", module)
   .add("Initial", () => (
     <InterviewerList
       interviewers={interviewers}
+      value={null}
     />
   ))
   .add("Selected", () => (
     <InterviewerList
       interviewers={interviewers}
-      value={3}
+      value={interviewers[0]}
     />
   ))
   .add("Clickable", () => (
     <InterviewerList
       interviewers={interviewers}
       onChange={action("setInterviewer")}
+      value={null}
     />
   ));
 
