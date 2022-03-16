@@ -10,15 +10,11 @@ import useApplicationData from "hooks/useApplicationData";
 import "components/Application.scss";
 
 function Application() {
-  const {
-    state,
-    setDay,
-    bookInterview,
-    cancelInterview
-  } = useApplicationData();
+  const { state, setDay, bookInterview, cancelInterview } =
+    useApplicationData();
 
   const appointments = getAppointmentsForDay(state, state.day).map(
-    appointment => {
+    (appointment) => {
       return (
         <Appointment
           key={appointment.id}
@@ -56,6 +52,6 @@ function Application() {
       </section>
     </main>
   );
-};
+}
 
 export default Application;
