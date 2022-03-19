@@ -10,7 +10,6 @@ import useVisualMode from "hooks/useVisualMode";
 import "./styles.scss";
 
 function Appointment(props) {
-
   const CONFIRM = "CONFIRM";
   const EMPTY = "EMPTY";
   const ERROR_DELETE = "ERROR_DELETE";
@@ -25,14 +24,8 @@ function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-  const {
-    id,
-    time,
-    interview,
-    interviewers,
-    bookInterview,
-    cancelInterview,
-  } = props;
+  const { id, time, interview, interviewers, bookInterview, cancelInterview } =
+    props;
 
   /**
    * Triggers update of db and local application state with new interview
@@ -43,19 +36,14 @@ function Appointment(props) {
    */
   function save(name = "", interviewer = null) {
     transition(SAVING);
-    // Show error screen if name field is empty or no interview selected
-    if (!name || !interviewer) {
-      transition(ERROR_SAVE, true);
-    } else {
-      const interview = {
-        student: name,
-        interviewer: interviewer.id
-      };
-      bookInterview(id, interview)
-        .then(() => transition(SHOW))
-        .catch(() => transition(ERROR_SAVE, true));
-    }
-  };
+    const interview = {
+      student: name,
+      interviewer: interviewer.id,
+    };
+    bookInterview(id, interview)
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE, true));
+  }
 
   /** An event handler that is called when a user confirms the deletion of
    * an appointment, 'destroy' sets into motion the updating of the database and
@@ -67,7 +55,7 @@ function Appointment(props) {
     cancelInterview(id)
       .then(() => transition(EMPTY))
       .catch(() => transition(ERROR_DELETE, true));
-  };
+  }
 
   return (
     <article className="appointment">
@@ -76,17 +64,10 @@ function Appointment(props) {
       {mode === SAVING && <Status message="Saving" />}
       {mode === DELETING && <Status message="Deleting" />}
       {mode === ERROR_SAVE && (
-        <Error
-          message="Could not book appointment."
-          onClose={back}
-        />
-      )
-      }
+        <Error message="Could not book appointment." onClose={back} />
+      )}
       {mode === ERROR_DELETE && (
-        <Error
-          message="Could not delete appointment."
-          onClose={back}
-        />
+        <Error message="Could not delete appointment." onClose={back} />
       )}
       {mode === SHOW && (
         <Show
@@ -97,11 +78,7 @@ function Appointment(props) {
         />
       )}
       {mode === CREATE && (
-        <Form
-          interviewers={interviewers}
-          onCancel={back}
-          onSave={save}
-        />
+        <Form interviewers={interviewers} onCancel={back} onSave={save} />
       )}
       {mode === CONFIRM && (
         <Confirm
@@ -121,6 +98,6 @@ function Appointment(props) {
       )}
     </article>
   );
-};
+}
 
 export default Appointment;
