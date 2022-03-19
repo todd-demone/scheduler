@@ -12,6 +12,7 @@ function Form(props) {
    */
   function reset() {
     setStudent("");
+    setError("");
     setInterviewer(null);
   }
 
@@ -34,6 +35,7 @@ function Form(props) {
       return;
     }
 
+    setError("");
     props.onSave(student, interviewer);
   }
 
