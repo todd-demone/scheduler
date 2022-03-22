@@ -6,19 +6,19 @@
  * @returns number of appointment spots remaining
  */
 function updateSpotsRemaining(state, day) {
-  const initialSpots = 5;
+  // const initialSpots = 5;
 
-  return day.appointments.reduce(
-    (previousSpotsTotal, appointmentId) => {
-      if (state.appointments[appointmentId].interview) {
-        return previousSpotsTotal - 1;
-      } else {
-        return previousSpotsTotal;
-      }
-    }
-    , initialSpots
-  );
-};
+  return day.appointments.reduce((previousSpotsTotal, appointmentId) => {
+    return state.appointments[appointmentId].interview
+      ? previousSpotsTotal
+      : previousSpotsTotal + 1;
+    // if (state.appointments[appointmentId].interview) {
+    //   return previousSpotsTotal - 1;
+    // } else {
+    //   return previousSpotsTotal;
+    // }
+  }, 0);
+}
 
 /**
  * Returns the new application state
@@ -27,7 +27,6 @@ function updateSpotsRemaining(state, day) {
  * @returns object containing new application state
  */
 function reducer(state, action) {
-
   if (action.type === "SET_DAY") {
     const { day } = action;
     return { ...state, day };
@@ -37,19 +36,19 @@ function reducer(state, action) {
     const { id, interview } = action;
     const appointment = {
       ...state.appointments[id],
-      interview
+      interview,
     };
     const appointments = {
       ...state.appointments,
-      [id]: appointment
+      [id]: appointment,
     };
     const newState = {
       ...state,
-      appointments
+      appointments,
     };
     const days = state.days.map((day) => ({
       ...day,
-      spots: updateSpotsRemaining(newState, day)
+      spots: updateSpotsRemaining(newState, day),
     }));
 
     return { ...newState, days };
@@ -61,6 +60,6 @@ function reducer(state, action) {
   }
 
   return state;
-};
+}
 
 export default reducer;
