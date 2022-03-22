@@ -5,7 +5,6 @@ import {
   waitForElement,
   fireEvent,
   getByText,
-  prettyDOM,
   getAllByTestId,
   getByAltText,
   getByPlaceholderText,
@@ -63,7 +62,5 @@ describe("Application", () => {
     const days = getAllByTestId(container, "day");
     const day = days.find((day) => queryByText(day, "Monday"));
     expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
-    debug();
-    // console.log(prettyDOM(day));
   });
 });
