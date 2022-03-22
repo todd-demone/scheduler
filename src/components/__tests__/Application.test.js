@@ -10,6 +10,7 @@ import {
   getByPlaceholderText,
   waitForElementToBeRemoved,
   queryByText,
+  queryByAltText,
 } from "@testing-library/react";
 import Application from "components/Application";
 import "../../__mocks__/axios";
@@ -62,5 +63,56 @@ describe("Application", () => {
     const days = getAllByTestId(container, "day");
     const day = days.find((day) => queryByText(day, "Monday"));
     expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
+  });
+
+  it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
+    // 1. Render the Application
+    const { container } = render(<Application />);
+
+    // 2. Wait until the text "Archie Cohen" is displayed.
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+
+    // 3.1 Find the first Show component (booked appointment).
+    const appointment = getAllByTestId(container, "appointment").find(
+      (appointment) => queryByText(appointment, "Archie Cohen")
+    );
+
+    // 3.2 Click the Delete button on that Show component.
+    const deleteButton = queryByAltText(appointment, "Delete");
+    fireEvent.click(deleteButton);
+
+    // 4. Check that the Confirm component is shown.
+    expect(
+      getByText(appointment, "Are you sure you would like to delete?")
+    ).toBeInTheDocument();
+
+    // 5. Click the "Confirm" button on the Confirm component.
+    const confirmButton = queryByText(appointment, "Confirm");
+    fireEvent.click(confirmButton);
+
+    // 6. Check that the Status component is displayed with the text "Deleting"
+    expect(getByText(appointment, "Deleting")).toBeInTheDocument();
+
+    // 7. Check that the Empty component (empty appointment element) is displayed
+    await waitForElementToBeRemoved(() => queryByText(appointment, "Deleting"));
+    expect(getByAltText(appointment, "Add")).toBeInTheDocument();
+
+    // 8. Check that DayListItem component with the text "Monday" also has the text "2 spots remaining"
+    const day = getAllByTestId(container, "day").find((day) =>
+      queryByText(day, "Monday")
+    );
+    expect(getByText(day, /2 spots remaining/i)).toBeInTheDocument();
+  });
+
+  it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
+    //
+  });
+
+  it("shows the save error when failing to save an appointment", async () => {
+    //
+  });
+
+  it("shows the delete error when failing to delete an existing appointment", async () => {
+    //
   });
 });
