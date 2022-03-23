@@ -6,17 +6,10 @@
  * @returns number of appointment spots remaining
  */
 function updateSpotsRemaining(state, day) {
-  // const initialSpots = 5;
-
   return day.appointments.reduce((previousSpotsTotal, appointmentId) => {
     return state.appointments[appointmentId].interview
       ? previousSpotsTotal
       : previousSpotsTotal + 1;
-    // if (state.appointments[appointmentId].interview) {
-    //   return previousSpotsTotal - 1;
-    // } else {
-    //   return previousSpotsTotal;
-    // }
   }, 0);
 }
 
