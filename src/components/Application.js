@@ -14,18 +14,16 @@ function Application() {
     useApplicationData();
 
   const appointments = getAppointmentsForDay(state, state.day).map(
-    (appointment) => {
-      return (
-        <Appointment
-          key={appointment.id}
-          {...appointment}
-          interview={getInterview(state, appointment.interview)}
-          interviewers={getInterviewersForDay(state, state.day)}
-          bookInterview={bookInterview}
-          cancelInterview={cancelInterview}
-        />
-      );
-    }
+    (appointment) => (
+      <Appointment
+        key={appointment.id}
+        {...appointment}
+        interview={getInterview(state, appointment.interview)}
+        interviewers={getInterviewersForDay(state, state.day)}
+        bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
+      />
+    )
   );
 
   return (
